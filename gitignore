@@ -1,0 +1,13 @@
+.idea/
+*.log
+*.mdmp
+target/
+allure-results/
+build/
+*.ipr
+*.iml
+*.iws
+downloads/
+.allure
+
+#/src/main/resources/

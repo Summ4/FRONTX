@@ -1,0 +1,1 @@
+{"uuid":"12b90e4b-9352-42a0-a989-49bed863e2c8","name":"selenideWebTesting.CPM","children":["c3d4f6f8-9b23-4ec7-a122-d86f8a47c74c"],"befores":[{"name":"beforeClass","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1681977780855,"stop":1681977786794}],"afters":[],"links":[],"start":1681977780848,"stop":1681977796820}

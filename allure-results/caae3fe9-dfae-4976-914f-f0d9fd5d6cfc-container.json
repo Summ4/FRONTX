@@ -1,0 +1,1 @@
+{"uuid":"caae3fe9-dfae-4976-914f-f0d9fd5d6cfc","name":"selenideWebTesting.Roles","children":["8a9073ec-ee8e-40ae-ac45-4dfadde5c067"],"befores":[{"name":"beforeClass","status":"passed","stage":"finished","description":"","steps":[],"attachments":[],"parameters":[],"start":1681832458832,"stop":1681832464627}],"afters":[],"links":[],"start":1681832458825,"stop":1681832480607}
