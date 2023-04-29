@@ -40,12 +40,14 @@ public class Roles {
             userManagement_retailActive = $x("//span[text()=' Retail Active ']"),
             userManagement_retailPassive = $x("//span[text()=' Retail Passive ']"),
             userManagement_retailDigitalOnboarding = $x("//span[text()=' Retail Digital Onboarding ']"),
+            userManagement_corporateDirector = $x("//span[text()=' Corporate Director ']"),
+            userManagement_corporateActive = $x("//span[text()=' Corporate Active ']"),
+            userManagement_corporatePassive = $x("//span[text()=' Corporate Passive ']"),
             roleChangeWarning = $x("//p[text()='განხორციელებული ცვლილებები აისახება როლზე']"),
 
 
     addNewLimit = $x("//p[text()=' ახალი ოპერაციის დამატება + ']"),
-            approvalGroup = $x("//p[text()='აირჩიე ჯგუფი']/..//mat-select")
-    ;
+            approvalGroup = $x("//p[text()='აირჩიე ჯგუფი']/..//mat-select");
 
     public ElementsCollection
             rolesList = $$x("//tr[@class='mat-row cdk-row ng-star-inserted']"),

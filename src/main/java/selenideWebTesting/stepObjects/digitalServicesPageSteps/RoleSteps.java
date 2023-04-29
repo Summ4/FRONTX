@@ -1,4 +1,4 @@
-package selenideWebTesting.stepObjects.digitalServicesPageSteps.Roles;
+package selenideWebTesting.stepObjects.digitalServicesPageSteps;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
@@ -60,7 +60,6 @@ public class RoleSteps extends Roles {
         return this;
 
     }
-
 
     @Step
     public RoleSteps clickOnViewRole() {
@@ -374,11 +373,22 @@ public class RoleSteps extends Roles {
 
 
     @Step
-    public RoleSteps checkUserManagementDropdownOptions() {
+    public RoleSteps checkUserManagementDropdownOptionsForRetailUser() {
 
         userManagement_retailActive.shouldBe(Condition.visible, Duration.ofMillis(waiter));
         userManagement_retailPassive.shouldBe(Condition.visible, Duration.ofMillis(waiter));
         userManagement_retailDigitalOnboarding.shouldBe(Condition.visible, Duration.ofMillis(waiter));
+
+        return this;
+
+    }
+
+    @Step
+    public RoleSteps checkUserManagementDropdownOptionsForCorporateUser() {
+
+        userManagement_corporateDirector.shouldBe(Condition.visible, Duration.ofMillis(waiter));
+        userManagement_corporateActive.shouldBe(Condition.visible, Duration.ofMillis(waiter));
+        userManagement_corporatePassive.shouldBe(Condition.visible, Duration.ofMillis(waiter));
 
         return this;
 

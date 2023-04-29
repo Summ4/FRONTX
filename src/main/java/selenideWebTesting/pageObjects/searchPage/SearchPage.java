@@ -6,7 +6,7 @@ import static com.codeborne.selenide.Selenide.$x;
 
 public class SearchPage {
 
-    public SelenideElement searchInput = $x("//input[@class='client__search-field ng-untouched ng-pristine ng-invalid']"),
+    public SelenideElement searchInput = $x("//input[@placeholder='მოძებნე თიბისის მომხმარებელი']"),
     searchResult = $x("//div[@class='list-item client-type-1']");
 
 

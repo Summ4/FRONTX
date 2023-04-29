@@ -14,7 +14,8 @@ public class LoginPage {
             passwordInput = $(By.id("Password")),
             loginButton = $(By.id("btnSubmit")),
             logIntoSystemHeader = $(new ByText("TBCFrontX სისტემაში შესვლა")),
-            searchInput = $x("//input[@class='client__search-field ng-untouched ng-pristine ng-invalid']");
+            searchInput = $x("//input[@class='client__search-field ng-untouched ng-pristine ng-invalid']"),
+            logoHeader = $("#header-nav-item");
 
 
 }

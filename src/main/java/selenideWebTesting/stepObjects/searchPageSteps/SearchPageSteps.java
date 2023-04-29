@@ -2,6 +2,7 @@ package selenideWebTesting.stepObjects.searchPageSteps;
 
 import com.codeborne.selenide.Condition;
 import io.qameta.allure.Step;
+import org.openqa.selenium.Keys;
 import selenideWebTesting.pageObjects.searchPage.SearchPage;
 
 import java.time.Duration;
@@ -24,6 +25,7 @@ public class SearchPageSteps extends SearchPage {
 
         searchInput.shouldBe(Condition.visible, Duration.ofMillis(longWaiter));
         searchInput.setValue(user);
+        searchInput.sendKeys(Keys.ENTER);
 
         return this;
 

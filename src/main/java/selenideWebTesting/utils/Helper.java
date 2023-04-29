@@ -11,4 +11,11 @@ public class Helper {
         return RandomStringUtils.random(10, true, false);
 
     }
+
+    public int getRandomNumber() {
+
+        return new Random().nextInt(100,1000);
+
+    }
+
 }

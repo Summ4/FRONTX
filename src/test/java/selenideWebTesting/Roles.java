@@ -4,7 +4,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Story;
 import org.testng.annotations.Test;
 import selenideWebTesting.stepObjects.digitalServicesPageSteps.DigitalServicesPageSteps;
-import selenideWebTesting.stepObjects.digitalServicesPageSteps.Roles.RoleSteps;
+import selenideWebTesting.stepObjects.digitalServicesPageSteps.RoleSteps;
 import selenideWebTesting.utils.ConfigAndLoginSteps;
 import selenideWebTesting.utils.Helper;
 
@@ -17,6 +17,7 @@ public class Roles extends ConfigAndLoginSteps {
     DigitalServicesPageSteps digitalServicesPageSteps = new DigitalServicesPageSteps();
     RoleSteps roleSteps = new RoleSteps();
     Helper helper = new Helper();
+    ConfigAndLoginSteps configAndLoginSteps = new ConfigAndLoginSteps();
 
     @Test(description = "[WPL-T7980]")
     @Story("Role Page -> Bottom of the page -> Visual")
@@ -85,14 +86,14 @@ public class Roles extends ConfigAndLoginSteps {
 
     }
 
-    @Test(description = "[WPL-T7984]")
-    @Story("Role Page -> Actions tab -> Pressing \"Three dots\" -> Edit -> Actions tab -> Choosing a role \"აირჩიე როლის შაბლონი\"")
+    @Test(description = "[WPL-T8049]")
+    @Story("Role Page -> Actions tab -> Pressing \"Three dots\" -> Edit -> Actions tab -> Choosing a role \"აირჩიე როლის შაბლონი\" When user is Corporate")
     @Description("""
             ჩამოსაშლელი ველია სადაც უნდა ავირჩიოთ სამი შესაძლო ვარიანტიდან:
             Corporate Director
             Corporate Active
             Corporate Passive""")
-    public void userManagementDropdownAvailableOptions() {
+    public void userManagementDropdownAvailableOptionsWhenUserIsCorporate() {
 
         digitalServicesPageSteps
                 .clickOnUsersHeader()
@@ -101,7 +102,29 @@ public class Roles extends ConfigAndLoginSteps {
                 .hoverOnThreeDotsOnFirstRole()
                 .clickOnEditRole()
                 .clickOnUserManagementDrowdown()
-                .checkUserManagementDropdownOptions();
+                .checkUserManagementDropdownOptionsForCorporateUser();
+
+    }
+
+    @Test(description = "[WPL-T8247]")
+    @Story("Role Page -> Actions tab -> Pressing \"Three dots\" -> Edit -> Actions tab -> Choosing a role \"აირჩიე როლის შაბლონი\" When user is Retail")
+    @Description("""
+            ჩამოსაშლელი ველია სადაც უნდა ავირჩიოთ სამი შესაძლო ვარიანტიდან:
+            Retail Active
+            Retail Passive
+            Retail Digital Onboarding""")
+    public void userManagementDropdownAvailableOptionsWhenUserIsRetail() {
+
+        configAndLoginSteps
+                .beforeStepForRetailUsers("6449887");
+        digitalServicesPageSteps
+                .clickOnUsersHeader()
+                .clickOnRolesHeader();
+        roleSteps
+                .hoverOnThreeDotsOnFirstRole()
+                .clickOnEditRole()
+                .clickOnUserManagementDrowdown()
+                .checkUserManagementDropdownOptionsForRetailUser();
 
     }
 
@@ -360,6 +383,8 @@ public class Roles extends ConfigAndLoginSteps {
             "if we want to set approval group for retail, we need to Choose Retail as option and if we want to set it for corporate, we should choose corporate")
     public void checkApprovalGroupWhenUserIsRetail() {
 
+        configAndLoginSteps
+                .beforeStepForRetailUsers("6449887");
         digitalServicesPageSteps
                 .clickOnUsersHeader()
                 .clickOnRolesHeader();

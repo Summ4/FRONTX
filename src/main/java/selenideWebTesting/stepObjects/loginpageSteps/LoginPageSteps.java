@@ -40,12 +40,12 @@ public class LoginPageSteps extends LoginPage {
     public LoginPageSteps logginIntoSystem(String username, String password) {
 
         loginButton.shouldBe(visible, Duration.ofMillis(longWaiter));
-        logIntoSystemHeader.shouldBe(visible,Duration.ofMillis(longWaiter));
+        logIntoSystemHeader.shouldBe(visible, Duration.ofMillis(longWaiter));
 
-        userNameInput.shouldBe(enabled);
-        userNameInput.shouldBe(enabled);
-        passwordInput.shouldBe(enabled);
-        passwordInput.setValue(password);
+//        userNameInput.shouldBe(enabled);
+//        userNameInput.shouldBe(enabled);
+//        passwordInput.shouldBe(enabled);
+//        passwordInput.setValue(password);
         loginButton.shouldBe(visible, Duration.ofMillis(longWaiter));
         loginButton.click();
 
@@ -53,11 +53,29 @@ public class LoginPageSteps extends LoginPage {
     }
 
     @Step
-    public LoginPageSteps checkIfLoginWasSuccessfull(){
+    public LoginPageSteps checkIfLoginWasSuccessfull() {
 
         searchInput.shouldBe(Condition.visible, Duration.ofMillis(longWaiter));
 
         return this;
+
+    }
+
+    @Step
+    public LoginPageSteps clickOnLogo() {
+
+        logoHeader.shouldBe(Condition.visible, Duration.ofMillis(longWaiter));
+        logoHeader.click();
+
+        return this;
+
+    }
+
+    @Step
+    public boolean checkIfUserIsOnLoginPage() throws InterruptedException {
+
+        Thread.sleep(3000);
+        return logIntoSystemHeader.isDisplayed();
 
     }
 
