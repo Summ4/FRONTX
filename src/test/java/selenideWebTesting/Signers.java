@@ -67,14 +67,14 @@ public class Signers extends ConfigAndLoginSteps {
         signersSteps
                 .clickOnAddSigningRulesButton()
                 .addNewFinancialSigningRule(name, String.valueOf(limitNumber), "GEL", "Manage Loan Prepayment Application", "Director")
-                .checkSuccessTextAfterChange()
+                .checkSuccessText()
                 .clickOnBackButton();
 
         digitalServicesPageSteps
                 .clickOnSigningRulesHeader();
 
         signersSteps
-                .hoverOnSignerRolesThreeDotsWithName(name)
+                .hoverOnThreeDotsWithName(name)
                 .clickOnViewSignerRole()
                 .checkFinancialSignersHeaders()
                 .clickOnBackButton();
@@ -83,9 +83,9 @@ public class Signers extends ConfigAndLoginSteps {
                 .clickOnSigningRulesHeader();
 
         signersSteps
-                .hoverOnSignerRolesThreeDotsWithName(name)
+                .hoverOnThreeDotsWithName(name)
                 .clickOnDeleteSignerRole()
-                .checkSuccessTextAfterChange();
+                .checkSuccessText();
 
     }
 
@@ -108,14 +108,14 @@ public class Signers extends ConfigAndLoginSteps {
         signersSteps
                 .clickOnAddSigningRulesButton()
                 .addNewNonFinancialSigningRule(name, "Manage Current Account Open", "Director")
-                .checkSuccessTextAfterChange()
+                .checkSuccessText()
                 .clickOnBackButton();
 
         digitalServicesPageSteps
                 .clickOnSigningRulesHeader();
 
         signersSteps
-                .hoverOnSignerRolesThreeDotsWithName(name)
+                .hoverOnThreeDotsWithName(name)
                 .clickOnViewSignerRole()
                 .checkNonFinancialSignersHeaders()
                 .clickOnBackButton();
@@ -124,9 +124,9 @@ public class Signers extends ConfigAndLoginSteps {
                 .clickOnSigningRulesHeader();
 
         signersSteps
-                .hoverOnSignerRolesThreeDotsWithName(name)
+                .hoverOnThreeDotsWithName(name)
                 .clickOnDeleteSignerRole()
-                .checkSuccessTextAfterChange();
+                .checkSuccessText();
 
     }
 
@@ -143,14 +143,14 @@ public class Signers extends ConfigAndLoginSteps {
         signersSteps
                 .clickOnAddSigningRulesButton()
                 .addNewNonFinancialSigningRule(name, "Manage Current Account Open", "Director")
-                .checkSuccessTextAfterChange()
+                .checkSuccessText()
                 .clickOnBackButton();
 
         digitalServicesPageSteps
                 .clickOnSigningRulesHeader();
 
         signersSteps
-                .hoverOnSignerRolesThreeDotsWithName(name)
+                .hoverOnThreeDotsWithName(name)
                 .clickOnViewSignerRole()
                 .updateButtonIsnotAvailable()
                 .clickOnBackButton();
@@ -159,9 +159,9 @@ public class Signers extends ConfigAndLoginSteps {
                 .clickOnSigningRulesHeader();
 
         signersSteps
-                .hoverOnSignerRolesThreeDotsWithName(name)
+                .hoverOnThreeDotsWithName(name)
                 .clickOnDeleteSignerRole()
-                .checkSuccessTextAfterChange();
+                .checkSuccessText();
 
     }
 
@@ -180,14 +180,14 @@ public class Signers extends ConfigAndLoginSteps {
         signersSteps
                 .clickOnAddSigningRulesButton()
                 .addNewNonFinancialSigningRule(name, "Manage Current Account Open", "Director")
-                .checkSuccessTextAfterChange()
+                .checkSuccessText()
                 .clickOnBackButton();
 
         digitalServicesPageSteps
                 .clickOnSigningRulesHeader();
 
         signersSteps
-                .hoverOnSignerRolesThreeDotsWithName(name)
+                .hoverOnThreeDotsWithName(name)
                 .clickOnEditOnSignerRolePage()
                 .clickOnUpdateButtonInSigningRule();
 
@@ -197,16 +197,17 @@ public class Signers extends ConfigAndLoginSteps {
                 .updateSigningRuleName(name)
                 .clickOnUpdateButton()
                 .clickOnNextButton()
+                .checkSuccessText()
                 .clickOnBackButton();
 
         digitalServicesPageSteps
                 .clickOnSigningRulesHeader();
-
+        Thread.sleep(2000);
         signersSteps
                 .checkIfSignerRuleExist(name)
-                .hoverOnSignerRolesThreeDotsWithName(name)
+                .hoverOnThreeDotsWithName(name)
                 .clickOnDeleteSignerRole()
-                .checkSuccessTextAfterChange();
+                .checkSuccessText();
 
     }
 
@@ -222,34 +223,56 @@ public class Signers extends ConfigAndLoginSteps {
         signersSteps
                 .clickOnAddSigningRulesButton()
                 .addNewNonFinancialSigningRule(name, "Manage Current Account Open", "Director")
-                .checkSuccessTextAfterChange()
+                .checkSuccessText()
                 .clickOnBackButton();
 
         digitalServicesPageSteps
                 .clickOnSigningRulesHeader();
 
         signersSteps
-                .hoverOnSignerRolesThreeDotsWithName(name)
+                .hoverOnThreeDotsWithName(name)
                 .clickOnDeleteSignerRole()
-                .checkSuccessTextAfterChange()
+                .checkSuccessText()
                 .checkIfSigningRuleIsNotInList(name);
 
     }
 
-    @Test(description = "[WPL-T8324]")
-    @Story("Digital Services -> Pressing Signing Rules -> ოპერაციის ტიპი(ები) -> ოპერაციის დამატება")
+    @Test(description = "[WPL-T8239]")
+    @Story("Digital Services -> Pressing Edit Signing Rules -> ოპერაციის ტიპი(ები) -> ოპერაციის დამატება")
     @Description("ოპერაციის დამატებაზე დავაჭიროთ, უნდა ამოვარდეს pop-up-ი და ავირჩიოთ სასურველი ოპერაციის ტიპი, მაგალითად ბუღალტერი და შევინახოთ, გადავამოწმოთ, რომ დამატებული ოპერაცია შეინახა")
     public void checkIfOperationIsAdded() throws InterruptedException {
 
-        String operation = "Manage Current Account Open";
+        String operation1 = "Manage Current Account Open";
+        String operation2 = "Manage Subscription Application";
+        String[] operations = {operation1, operation2};
+
+        String name = helper.getRandomString();
 
         digitalServicesPageSteps
                 .clickOnSigningRulesHeader();
         signersSteps
                 .clickOnAddSigningRulesButton()
-                .chooseNonFinancialOperationType()
-                .chooseOperation(operation)
-                .checkIfOperationIsAdded(operation);
+                .addNewNonFinancialSigningRule(name, operation1, "Director")
+                .checkSuccessText()
+                .clickOnBackButton();
+
+        digitalServicesPageSteps
+                .clickOnSigningRulesHeader();
+
+        signersSteps
+                .hoverOnThreeDotsWithName(name)
+                .clickOnEditOnSignerRolePage()
+                .chooseOperation(operation2)
+                .checkSelectedOperations(operations)
+                .clickOnBackButton();
+
+        digitalServicesPageSteps
+                .clickOnSigningRulesHeader();
+
+        signersSteps
+                .hoverOnThreeDotsWithName(name)
+                .clickOnDeleteSignerRole()
+                .checkSuccessText();
 
 
     }
@@ -260,60 +283,61 @@ public class Signers extends ConfigAndLoginSteps {
             "მოცემულია ის ოპერაციები რაც ამ ხელმოწერას გააჩნია. ოპერაციის მარჯვნივ 3 წერლიზე დაჭერისას და წაშლის არჩევისას უნდა მოგვცეს საშუალება წავშალოთ ოპერაცია")
     public void deleteOperationType() throws InterruptedException {
 
-        String operation = "Manage Current Account Open";
+        String name = helper.getRandomString();
 
         digitalServicesPageSteps
                 .clickOnSigningRulesHeader();
         signersSteps
                 .clickOnAddSigningRulesButton()
-                .chooseNonFinancialOperationType()
-                .chooseOperation(operation)
-                .hoverOnThreeDotsOnFirstSigningRule()
+                .addNewNonFinancialSigningRule(name, "Manage Current Account Open", "Director")
+                .checkSuccessText()
+                .clickOnBackButton();
+
+        digitalServicesPageSteps
+                .clickOnSigningRulesHeader();
+
+        signersSteps
+                .hoverOnThreeDotsWithName(name)
+                .clickOnEditOnSignerRolePage()
+                .clickOnSigners()
+                .hoverOnFirstThreeDots()
                 .clickOnDeleteSignerRole()
                 .checkIfOperationsIsEmpty();
-
-
-    }
-
-    @Test(description = "[WPL-T8240]")
-    @Story("Digital Services -> Pressing Signing Rules -> ხელმოწერა(ები) -> წაშლა")
-    @Description("ხელმოწერის სია:\n" +
-            "მოცემულია ის ხელმოწერები რაც გააჩნია. ხელმოწერების მარჯვნივ 3 წერლიზე დაჭერისას და წაშლის არჩევისას უნდა მოგვცეს საშუალება წავშალოთ ოპერაცია")
-    public void deleteSigners() throws InterruptedException {
-
-        String signer = "Director";
-
-        digitalServicesPageSteps
-                .clickOnSigningRulesHeader();
-        signersSteps
-                .clickOnAddSigningRulesButton()
-                .chooseNonFinancialOperationType()
-                .clickOnSigners()
-                .chooseSigner(signer)
-                .hoverOnThreeDotsOnFirstSigningRule()
-                .clickOnDeleteSignerRole()
-                .checkIfSignersIsEmpty();
-
 
     }
 
     @Test(description = "[WPL-T8244]")
-    @Story("Digital Services -> Pressing Signing Rules -> ოპერაციის ტიპი(ები) -> ოპერაციის დამატება -> Available Buttons")
+    @Story("Digital Services -> Pressing Edit Signing Rules -> ოპერაციის ტიპი(ები) -> ოპერაციის დამატება -> Available Buttons")
     @Description("""
             Pop-up-ს აქვს 2 ღილაკი, "გაუქმება" და "დამატება"
             გაუქმებაზე დაჭერით უნდა გაქრეს pop-up-ი და არ შეინახოს ცვლილება""")
-    public void backButtonWhenAddingOperationType() throws InterruptedException {
+    public void editSigningRule_backButtonWhenAddingOperationType() throws InterruptedException {
 
-        String operation = "Manage Current Account Open";
+        String name = helper.getRandomString();
 
         digitalServicesPageSteps
                 .clickOnSigningRulesHeader();
         signersSteps
                 .clickOnAddSigningRulesButton()
-                .chooseNonFinancialOperationType()
-                .chooseOperationWithoutSaving(operation)
+                .addNewNonFinancialSigningRule(name, "Manage Current Account Open", "Director")
+                .checkSuccessText()
+                .clickOnBackButton();
+
+        digitalServicesPageSteps
+                .clickOnSigningRulesHeader();
+
+        signersSteps
+                .hoverOnThreeDotsWithName(name)
+                .clickOnEditOnSignerRolePage()
+                .clickOnSigners()
+                .hoverOnFirstThreeDots()
+                .clickOnDeleteSignerRole()
+                .chooseSignerWithoutSaving("Director")
                 .clickOnQuitButton()
-                .checkIfOperationsIsEmpty();
+                .checkIfSignersIsEmpty()
+                .clickOnBackButton()
+                .hoverOnThreeDotsWithName(name)
+                .clickOnDeleteSignerRole();
 
     }
 
@@ -345,14 +369,26 @@ public class Signers extends ConfigAndLoginSteps {
             user can choose more than 1 option and every next option will be listed below""")
     public void addMorethanOneSigner() throws InterruptedException {
 
-        String[] signers = {"Director", "Trusted Person"};
-
+        String name = helper.getRandomString();
+        String signer1 = "Director";
+        String signer2 = "Trusted Person";
+        String[] signers = {signer1, signer2};
         digitalServicesPageSteps
                 .clickOnSigningRulesHeader();
         signersSteps
                 .clickOnAddSigningRulesButton()
+                .addNewNonFinancialSigningRule(name, "Manage Current Account Open", signer1)
+                .checkSuccessText()
+                .clickOnBackButton();
+
+        digitalServicesPageSteps
+                .clickOnSigningRulesHeader();
+
+        signersSteps
+                .hoverOnThreeDotsWithName(name)
+                .clickOnEditOnSignerRolePage()
                 .clickOnSigners()
-                .chooseMoreThanOneSigner(signers)
+                .chooseSigner(signer2)
                 .checkSelectedSigners(signers);
 
     }
@@ -371,14 +407,14 @@ public class Signers extends ConfigAndLoginSteps {
         signersSteps
                 .clickOnAddSigningRulesButton()
                 .addNewFinancialSigningRule(name, String.valueOf(limitNumber), "GEL", "Manage Loan Prepayment Application", "Director")
-                .checkSuccessTextAfterChange()
+                .checkSuccessText()
                 .clickOnBackButton();
 
         digitalServicesPageSteps
                 .clickOnSigningRulesHeader();
 
         signersSteps
-                .hoverOnSignerRolesThreeDotsWithName(name)
+                .hoverOnThreeDotsWithName(name)
                 .clickOnEditOnSignerRolePage()
                 .clickOnUpdateButtonInSigningRule()
                 .selectOperationType("არაფინანსური")
@@ -391,11 +427,10 @@ public class Signers extends ConfigAndLoginSteps {
         digitalServicesPageSteps
                 .clickOnSigningRulesHeader();
 
-        Thread.sleep(2000);
         signersSteps
-                .hoverOnSignerRolesThreeDotsWithName(name)
+                .hoverOnThreeDotsWithName(name)
                 .clickOnDeleteSignerRole()
-                .checkSuccessTextAfterChange();
+                .checkSuccessText();
 
     }
 
@@ -413,14 +448,14 @@ public class Signers extends ConfigAndLoginSteps {
         signersSteps
                 .clickOnAddSigningRulesButton()
                 .addNewNonFinancialSigningRule(name, "Manage Current Account Open", "Director")
-                .checkSuccessTextAfterChange()
+                .checkSuccessText()
                 .clickOnBackButton();
 
         digitalServicesPageSteps
                 .clickOnSigningRulesHeader();
 
         signersSteps
-                .hoverOnSignerRolesThreeDotsWithName(name)
+                .hoverOnThreeDotsWithName(name)
                 .clickOnEditOnSignerRolePage()
                 .clickOnUpdateButtonInSigningRule()
                 .selectOperationType("ფინანსური")
@@ -435,12 +470,295 @@ public class Signers extends ConfigAndLoginSteps {
         digitalServicesPageSteps
                 .clickOnSigningRulesHeader();
 
-        Thread.sleep(2000);
         signersSteps
-                .hoverOnSignerRolesThreeDotsWithName(name)
+                .hoverOnThreeDotsWithName(name)
                 .clickOnDeleteSignerRole()
-                .checkSuccessTextAfterChange();
+                .checkSuccessText();
 
+
+    }
+
+    @Test(description = "[WPL-T8330]")
+    @Story("Digital Services -> Signers -> Pressing Add Signing Rule -> Visual")
+    @Description("""
+            By pressing Add singing Rule user will be redirected to a new page where is the following information:
+            "<- ხელმოწერის შექმნა" this will redirect user to the previous page ("ხელმომწერები")
+            "ოპერაციის ტიპი"
+            "სახელი"
+            "პროდუქტები:
+            ოპერაციის ტიპი(ები)
+            ხელმოწერა(ები)
+            "უკან" this will redirect user to the previous page ("ხელმომწერები")
+            "შენახვა" this will save all changes""")
+    public void checkButtonsSigningRuleBPage() {
+
+        digitalServicesPageSteps
+                .clickOnSigningRulesHeader();
+        signersSteps
+                .clickOnAddSigningRulesButton()
+                .checkButtonsOnAddNewSigningRulePage();
+
+    }
+
+    @Test(description = "[WPL-T8330]")
+    @Story("Digital Services -> Signers -> Pressing Add Signing Rule -> ოპერაციის ტიპი Сhoosing Financial")
+    @Description("""
+            if user chooses Financial in operation type, two new tabs will show up:
+            ლიმიტი
+            ვალუტა""")
+    public void checkNewTabsWhenChoosingFinancialOperationType() {
+
+        digitalServicesPageSteps
+                .clickOnSigningRulesHeader();
+        signersSteps
+                .clickOnAddSigningRulesButton()
+                .clickOnOperationTypeDropDown()
+                .selectOperationTypeFinancial()
+                .checkIfLimitsAndCurrencyLabelsAreVisibleWhenChoosingFinancialOperationType();
+
+    }
+
+    @Test(description = "[WPL-T8331]")
+    @Story("Digital Services -> Signers -> Pressing Add Signing Rule -> ოპერაციის ტიპი Сhoosing Non-Financial")
+    @Description("""
+            no new tabs will be added""")
+    public void checkThatNoNewTabsIsDisplayedWhenChoosingNonFinancialOperationType() {
+
+        digitalServicesPageSteps
+                .clickOnSigningRulesHeader();
+        signersSteps
+                .clickOnAddSigningRulesButton()
+                .clickOnOperationTypeDropDown()
+                .selectOperationTypeNonFinancial()
+                .checkLimitsAndCurrencyLabelsIsnotVisibleWhenChoosingNonFinancialOperationType();
+
+    }
+
+    @Test(description = "[WPL-T8333]")
+    @Story("Digital Services -> Signers -> Pressing Add Signing Rule -> ხელმოწერა(ები) -> ხელმოწერის დამატება -> Available Buttons")
+    @Description("""
+            Pop-up-ს აქვს 2 ღილაკი, "გაუქმება" და "დამატება"
+                                     გაუქმებაზე დაჭერით უნდა გაქრეს pop-up-ი და არ შეინახოს ცვლილება
+                                     დამატებაზე დაჭერისას არსებული ცვლილება უნდა შეინახოს და გაქრესპოპ-აპი""")
+    public void checkIfWeGetBackToSigningRulesPageWhenClickingOnBackButtonOnAddSigningRulePage() {
+
+        digitalServicesPageSteps
+                .clickOnSigningRulesHeader();
+        signersSteps
+                .clickOnAddSigningRulesButton()
+                .clickOnBackButton()
+                .checkSigningRulesHeaders();
+
+    }
+
+    @Test(description = "[WPL-T8240]")
+    @Story("Digital Services -> Pressing Edit Signing Rules -> ხელმოწერა(ები) -> წაშლა")
+    @Description("""
+            ხელმოწერის სია:
+            ოცემულია ის ხელმოწერები რაც გააჩნია. ხელმოწერების მარჯვნივ 3 წერლიზე დაჭერისას და წაშლის არჩევისას უნდა მოგვცეს საშუალება წავშალოთ ოპერაცია""")
+    public void checkDeleteButtonWhenHoveringOnSignersWhileEditingSigningRule() throws InterruptedException {
+
+        String name = helper.getRandomString();
+
+        digitalServicesPageSteps
+                .clickOnSigningRulesHeader();
+        signersSteps
+                .clickOnAddSigningRulesButton()
+                .addNewNonFinancialSigningRule(name, "Manage Current Account Open", "Director")
+                .checkSuccessText()
+                .clickOnBackButton();
+
+        digitalServicesPageSteps
+                .clickOnSigningRulesHeader();
+
+        signersSteps
+                .hoverOnThreeDotsWithName(name)
+                .clickOnEditOnSignerRolePage()
+                .clickOnSigners()
+                .hoverOnFirstThreeDots()
+                .clickOnDeleteSignerRole()
+                .checkIfSignersIsEmpty()
+                .clickOnBackButton();
+
+        digitalServicesPageSteps
+                .clickOnSigningRulesHeader();
+
+        signersSteps
+                .hoverOnThreeDotsWithName(name)
+                .clickOnDeleteSignerRole()
+                .checkSuccessText();
+
+    }
+
+    @Test(description = "[WPL-T8334]")
+    @Story("Digital Services -> Signers -> Pressing Add Signing Rule -> ხელმოწერა(ები) -> წაშლა")
+    @Description("""
+            ხელმოწერის სია:
+            ოცემულია ის ხელმოწერები რაც გააჩნია. ხელმოწერების მარჯვნივ 3 წერლიზე დაჭერისას და წაშლის არჩევისას უნდა მოგვცეს საშუალება წავშალოთ ოპერაცია""")
+    public void createSigningRule_checkDeleteButtonWhenHoveringOnSigners() throws InterruptedException {
+
+        String signer = "Director";
+
+        digitalServicesPageSteps
+                .clickOnSigningRulesHeader();
+        signersSteps
+                .clickOnAddSigningRulesButton()
+                .clickOnSigners()
+                .chooseSigner(signer)
+                .hoverOnFirstThreeDots()
+                .clickOnDeleteSignerRole()
+                .checkIfSignersIsEmpty();
+
+    }
+
+    @Test(description = "[WPL-T8245]")
+    @Story("Digital Services -> Signers -> Pressing Add Signing Rule -> ხელმოწერა(ები) -> ხელმოწერის დამატება -> Visual")
+    @Description("""
+            there should be visible next information:
+            "აირჩიე ხელმომწერი"
+            user can choose more than 1 option and every next option will be listed below""")
+    public void selectMorethanOneSignerWhenCreatingSigningRule() throws InterruptedException {
+
+        String[] signers = {"Director", "Trusted Person"};
+
+        digitalServicesPageSteps
+                .clickOnSigningRulesHeader();
+        signersSteps
+                .clickOnAddSigningRulesButton()
+                .clickOnSigners()
+                .chooseMoreThanOneSigner(signers)
+                .checkSelectedSigners(signers);
+
+    }
+
+    @Test(description = "[WPL-T8336]")
+    @Story("Digital Services -> Signers -> Pressing Add Signing Rule -> ოპერაციის ტიპი(ები) -> წაშლა")
+    @Description("ოპერაციების სია:\n" +
+            "მოცემულია ის ოპერაციები რაც ამ ხელმოწერას გააჩნია. ოპერაციის მარჯვნივ 3 წერლიზე დაჭერისას და წაშლის არჩევისას უნდა მოგვცეს საშუალება წავშალოთ ოპერაცია")
+    public void deleteOperationTypeWhenCreatingSigningRule() throws InterruptedException {
+
+        String operation = "Manage Current Account Open";
+
+        digitalServicesPageSteps
+                .clickOnSigningRulesHeader();
+        signersSteps
+                .clickOnAddSigningRulesButton()
+                .chooseNonFinancialOperationType()
+                .chooseOperation(operation)
+                .hoverOnFirstThreeDots()
+                .clickOnDeleteSignerRole()
+                .checkIfOperationsIsEmpty();
+
+    }
+
+    @Test(description = "[WPL-T8336]")
+    @Story("Digital Services -> Signers -> Pressing Add Signing Rule -> ოპერაციის ტიპი(ები) -> ოპერაციის დამატება -> Available Buttons")
+    @Description("Pop-up-ს აქვს 2 ღილაკი, \"გაუქმება\" და \"დამატება\"\n" +
+            "გაუქმებაზე დაჭერით უნდა გაქრეს pop-up-ი და არ შეინახოს ცვლილება")
+    public void createSigningRule_backButtonWhenAddingOperationType() throws InterruptedException {
+
+        String operation = "Manage Current Account Open";
+
+        digitalServicesPageSteps
+                .clickOnSigningRulesHeader();
+        signersSteps
+                .clickOnAddSigningRulesButton()
+                .chooseOperationWithoutSaving(operation)
+                .clickOnQuitButton()
+                .checkIfOperationsIsEmpty();
+
+    }
+
+    @Test(description = "[WPL-T8338]")
+    @Story("Digital Services -> Signers -> Pressing Add Signing Rule -> ოპერაციის ტიპი(ები) -> ოპერაციის დამატება")
+    @Description("ოპერაციის დამატებაზე დავაჭიროთ, უნდა ამოვარდეს pop-up-ი და ავირჩიოთ სასურველი ოპერაციის ტიპი, " +
+            "მაგალითად ბუღალტერი და შევინახოთ, გადავამოწმოთ, რომ დამატებული ოპერაცია შეინახა")
+    public void createSigningRule_AddOperation() throws InterruptedException {
+
+        String operation = "Manage Current Account Open";
+
+        digitalServicesPageSteps
+                .clickOnSigningRulesHeader();
+        signersSteps
+                .clickOnAddSigningRulesButton()
+                .chooseOperation(operation)
+                .clickOnNextButton()
+                .checkIfOperationIsAdded(operation);
+
+    }
+
+    @Test(description = "[WPL-T8339]")
+    @Story("Digital Services -> Signers -> Pressing Add Signing Rule -> User added Signers and Operation Types and wants to change Type from Financial to Non-Financial")
+    @Description("""
+            By changing Type all of the information in  "ოპერაციის ტიპი(ები)" and "ხელმოწერა(ები)" must get deleted automatically""")
+    public void changingSigningRuleFromFinancialToNonFinancialWhenCreateingNewSigningRule() throws InterruptedException {
+
+        String operation = "Manage Current Account Open";
+        String director = "Director";
+
+        digitalServicesPageSteps
+                .clickOnSigningRulesHeader();
+        signersSteps
+                .clickOnAddSigningRulesButton()
+                .clickOnOperationTypeDropDown()
+                .selectOperationTypeFinancial()
+                .chooseOperation(operation)
+                .clickOnSigners()
+                .chooseSigner(director)
+                .clickOnOperationTypeDropDown()
+                .selectOperationTypeNonFinancial()
+                .checkIfOperationsIsEmpty()
+                .clickOnSigners()
+                .checkIfSignersIsEmpty();
+
+    }
+
+    @Test(description = "[WPL-T8339]")
+    @Story("Digital Services -> Signers -> Pressing Add Signing Rule -> User added Signers and Operation Types and wants to change Type from Non-Financial to Financial")
+    @Description("""
+            By changing Type all of the information in  "ოპერაციის ტიპი(ები)" and "ხელმოწერა(ები)" must get deleted automatically""")
+    public void changingSigningRuleFromNonFinancialToFinancialWhenCreateingNewSigningRule() throws InterruptedException {
+
+        String operation = "Manage Current Account Open";
+        String director = "Director";
+
+        digitalServicesPageSteps
+                .clickOnSigningRulesHeader();
+        signersSteps
+                .clickOnAddSigningRulesButton()
+                .clickOnOperationTypeDropDown()
+                .selectOperationTypeNonFinancial()
+                .chooseOperation(operation)
+                .clickOnSigners()
+                .chooseSigner(director)
+                .clickOnOperationTypeDropDown()
+                .selectOperationTypeFinancial()
+                .checkIfOperationsIsEmpty()
+                .clickOnSigners()
+                .checkIfSignersIsEmpty();
+
+    }
+
+    @Test(description = "[WPL-T8332]")
+    @Story("Digital Services -> Signers -> Pressing Add Signing Rule -> Mandatory Tabs")
+    @Description("""
+            All of the following tabs are mandatory to be filled in:
+            ოპერაციის ტიპი
+            თანხა (will appear if chosen financial in operation type)
+            ვალუტა (will appear if chosen financial in operation type)
+            სახელი
+            ოპერაციის ტაბი(ები)
+            ხელმოწერა(ები)
+            """)
+    public void notFillingAnySigningRulesTab() {
+
+        digitalServicesPageSteps
+                .clickOnSigningRulesHeader();
+        signersSteps
+                .clickOnAddSigningRulesButton()
+                .clickOnNextButton()
+                .checkErrorForNotFillingAnySigningRulesTab()
+                .closePopUp();
 
     }
 

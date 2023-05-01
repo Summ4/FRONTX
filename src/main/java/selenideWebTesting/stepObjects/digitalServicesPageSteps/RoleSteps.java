@@ -202,7 +202,9 @@ public class RoleSteps extends Roles {
     }
 
     @Step
-    public RoleSteps clickOnSelectAllActions() {
+    public RoleSteps clickOnSelectAllActions() throws InterruptedException {
+
+        Thread.sleep(2000);
 
         turnOnAllActions.shouldBe(Condition.visible, Duration.ofMillis(longWaiter));
 
@@ -214,7 +216,7 @@ public class RoleSteps extends Roles {
     }
 
     @Step
-    public RoleSteps checkIfAllActionsAreSelected() {
+    public RoleSteps checkIfAllActionsAreSelected() throws InterruptedException {
 
         actionsCategory.get(0).shouldBe(Condition.visible, Duration.ofMillis(longWaiter));
 
@@ -264,8 +266,7 @@ public class RoleSteps extends Roles {
     public RoleSteps editRoleName(String newRoleName) {
 
         roleName.shouldBe(Condition.visible, Duration.ofMillis(longWaiter));
-        roleName.sendKeys(Keys.COMMAND, "a");
-        roleName.sendKeys(Keys.BACK_SPACE);
+        roleName.setValue("");
         roleName.sendKeys(newRoleName);
 
         return this;
@@ -304,6 +305,15 @@ public class RoleSteps extends Roles {
     }
 
     @Step
+    public RoleSteps pressESC() {
+
+        html.sendKeys(Keys.ESCAPE);
+
+        return this;
+
+    }
+
+    @Step
     public RoleSteps clickOnBackToRolesButton() {
 
         bactToRolesButton.shouldBe(Condition.visible, Duration.ofMillis(longWaiter));
@@ -314,7 +324,7 @@ public class RoleSteps extends Roles {
     }
 
     @Step
-    public RoleSteps checkSuccessTextAfterChange() {
+    public RoleSteps checkSuccessText() {
 
         successTextAfterEdit.shouldBe(Condition.visible, Duration.ofMillis(longWaiter));
 
@@ -336,7 +346,7 @@ public class RoleSteps extends Roles {
     @Step
     public RoleSteps checkEditedRoleName(String newRoleName) {
 
-        new Roles().rolesList.get(0).shouldHave(Condition.text(newRoleName));
+        rolesList.get(0).shouldHave(Condition.text(newRoleName));
 
         return this;
 
@@ -588,6 +598,16 @@ public class RoleSteps extends Roles {
     }
 
     @Step
+    public RoleSteps clickOnDelete() {
+
+        deleteRole.shouldBe(Condition.visible, Duration.ofMillis(waiter));
+        deleteRole.click();
+
+        return this;
+
+    }
+
+    @Step
     public RoleSteps checkApprovalGroupsOptions(String option) {
 
         approvalGroup.shouldBe(Condition.visible, Duration.ofMillis(waiter));
@@ -602,6 +622,97 @@ public class RoleSteps extends Roles {
 
         return this;
 
+    }
+
+    @Step
+    public RoleSteps clickOnAddNewRole() throws InterruptedException {
+
+        Thread.sleep(2000);
+        addNewRoleButton.shouldBe(Condition.visible, Duration.ofMillis(waiter));
+        addNewRoleButton.click();
+
+
+        return this;
+    }
+
+    @Step
+    public RoleSteps createNewRole(String newRoleName) throws InterruptedException {
+
+        Thread.sleep(2000);
+
+        addNewRoleButton.shouldBe(Condition.visible, Duration.ofMillis(waiter));
+        addNewRoleButton.click();
+
+        roleName.shouldBe(Condition.visible, Duration.ofMillis(waiter));
+        roleName.setValue("");
+        roleName.sendKeys(newRoleName);
+
+//        userManagementDropDown.click();
+
+//        mat_options.get(0).shouldBe(Condition.visible, Duration.ofMillis(waiter));
+//        mat_options.get(0).click();
+
+        turnOnAllActions.parent().click();
+
+        nextButton.click();
+
+        addNewLimit.click();
+
+        approvalGroup.shouldBe(Condition.visible, Duration.ofMillis(waiter));
+
+        limitOperation.get(0).shouldBe(Condition.visible, Duration.ofMillis(waiter));
+        limitPeriodicity.get(0).shouldBe(Condition.visible, Duration.ofMillis(waiter));
+        roleLimitInputs.get(0).shouldBe(Condition.visible, Duration.ofMillis(waiter));
+
+        approvalGroup.click();
+        mat_options.get(0).click();
+
+        limitOperation.get(0).click();
+        mat_options.get(0).click();
+
+        roleLimitInputs.get(0).sendKeys("100");
+
+        limitPeriodicity.get(0).click();
+        mat_options.get(0).click();
+
+        nextButton.click();
+
+
+        return this;
+    }
+
+    @Step
+    public RoleSteps hoverOnThreeDotsWithName(String name) throws InterruptedException {
+
+        Thread.sleep(2000);
+
+        if (!nextArrowButton.isEnabled()) {
+            for (int i = 0; i < listOfChosenOptions.size(); i++) {
+                listOfChosenOptions.get(i).scrollTo();
+                if (listOfChosenOptions.get(i).has(Condition.text(name))) {
+                    threeDots.get(i).hover();
+                    break;
+                }
+            }
+        }
+
+        while (nextArrowButton.isEnabled()) {
+            boolean isOptionFound = false;
+            for (int i = 0; i < listOfChosenOptions.size(); i++) {
+                if (listOfChosenOptions.get(i).scrollTo().has(Condition.text(name))) {
+                    threeDots.get(i).hover();
+                    isOptionFound = true;
+                    break;
+                }
+            }
+            if (isOptionFound) {
+                break;
+            }
+            nextArrowButton.click();
+        }
+
+
+        return this;
     }
 
 }

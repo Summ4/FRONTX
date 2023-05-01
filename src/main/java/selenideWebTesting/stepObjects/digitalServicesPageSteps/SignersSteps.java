@@ -68,6 +68,7 @@ public class SignersSteps extends Signers {
                 break;
             }
         }
+        updateButton.sendKeys(Keys.ESCAPE);
         updateButton.click();
 
         return this;
@@ -148,6 +149,16 @@ public class SignersSteps extends Signers {
     }
 
     @Step
+    public SignersSteps clickOnAddSingersButton() {
+
+        addSingersButton.shouldBe(Condition.visible, Duration.ofMillis(waiter));
+        addSingersButton.click();
+
+        return this;
+
+    }
+
+    @Step
     public SignersSteps checkSelectedSigners(String[] signers) {
 
         for (int i = 0; i < listOfChosenOptions.size(); i++) {
@@ -162,6 +173,17 @@ public class SignersSteps extends Signers {
     public SignersSteps checkIfOperationIsAdded(String operation) {
 
         listOfChosenOptions.get(0).shouldHave(Condition.text(operation));
+
+        return this;
+
+    }
+
+    @Step
+    public SignersSteps checkSelectedOperations(String[] operations) {
+
+        for (int i = 0; i < listOfChosenOptions.size(); i++) {
+            listOfChosenOptions.get(i).shouldHave(Condition.partialText(operations[i]));
+        }
 
         return this;
 
@@ -204,7 +226,6 @@ public class SignersSteps extends Signers {
 
         signers.shouldBe(Condition.visible, Duration.ofMillis(waiter));
         signers.click();
-
 
         return this;
 
@@ -267,6 +288,7 @@ public class SignersSteps extends Signers {
                 break;
             }
         }
+        updateButton.sendKeys(Keys.ESCAPE);
         updateButton.click();
 
         signers.click();
@@ -307,6 +329,7 @@ public class SignersSteps extends Signers {
                 break;
             }
         }
+        updateButton.sendKeys(Keys.ESCAPE);
         updateButton.click();
 
         signers.click();
@@ -328,7 +351,7 @@ public class SignersSteps extends Signers {
     }
 
     @Step
-    public SignersSteps checkSuccessTextAfterChange() {
+    public SignersSteps checkSuccessText() {
 
         successText.shouldBe(Condition.visible, Duration.ofMillis(longWaiter));
 
@@ -337,7 +360,7 @@ public class SignersSteps extends Signers {
     }
 
     @Step
-    public SignersSteps hoverOnThreeDotsOnFirstSigningRule() {
+    public SignersSteps hoverOnFirstThreeDots() {
 
         threeDots.get(0).shouldBe(Condition.visible, Duration.ofMillis(longWaiter));
         threeDots.get(0).hover();
@@ -347,7 +370,9 @@ public class SignersSteps extends Signers {
     }
 
     @Step
-    public SignersSteps hoverOnSignerRolesThreeDotsWithName(String name) throws InterruptedException {
+    public SignersSteps hoverOnThreeDotsWithName(String name) throws InterruptedException {
+
+        Thread.sleep(2000);
 
         for (int i = 0; i < listOfChosenOptions.size(); i++) {
             listOfChosenOptions.get(i).scrollTo();
@@ -356,7 +381,7 @@ public class SignersSteps extends Signers {
                 break;
             }
         }
-        Thread.sleep(2000);
+
 
         return this;
     }
@@ -422,6 +447,26 @@ public class SignersSteps extends Signers {
     }
 
     @Step
+    public SignersSteps checkIfLimitsAndCurrencyLabelsAreVisibleWhenChoosingFinancialOperationType() {
+
+        addSigningRules_limitInput.shouldBe(Condition.visible, Duration.ofMillis(waiter));
+        addSigningRules_currencyDropdown.shouldBe(Condition.visible);
+
+        return this;
+
+    }
+
+    @Step
+    public SignersSteps checkLimitsAndCurrencyLabelsIsnotVisibleWhenChoosingNonFinancialOperationType() {
+
+        addSigningRules_limitInput.shouldNotBe(Condition.visible, Duration.ofMillis(waiter));
+        addSigningRules_currencyDropdown.shouldNotBe(Condition.visible);
+
+        return this;
+
+    }
+
+    @Step
     public SignersSteps selectOperationTypeNonFinancial() {
 
         addSigningRules_operationTypeNonFinancial.shouldBe(Condition.visible, Duration.ofMillis(waiter));
@@ -464,6 +509,7 @@ public class SignersSteps extends Signers {
     @Step
     public SignersSteps clickOnQuitButton() {
 
+        quitButton.sendKeys(Keys.ESCAPE);
         quitButton.shouldBe(Condition.visible, Duration.ofMillis(longWaiter));
         quitButton.click();
 
@@ -486,6 +532,7 @@ public class SignersSteps extends Signers {
 
         boolean signingRuleExists = false;
         int i;
+
         for (i = 0; i < listOfChosenOptions.size(); i++) {
             listOfChosenOptions.get(i).scrollTo();
             if (listOfChosenOptions.get(i).has(Condition.text(name))) {
@@ -513,8 +560,9 @@ public class SignersSteps extends Signers {
     public SignersSteps updateSigningRuleName(String name) {
 
         updateSigningRule_nameInput.shouldBe(Condition.visible, Duration.ofMillis(longWaiter));
-        updateSigningRule_nameInput.sendKeys(Keys.COMMAND, "a");
-        updateSigningRule_nameInput.sendKeys(Keys.BACK_SPACE);
+//        updateSigningRule_nameInput.sendKeys(Keys.COMMAND + "a" + Keys.DELETE);
+//        updateSigningRule_nameInput.sendKeys(Keys.DELETE);
+        updateSigningRule_nameInput.setValue("");
         updateSigningRule_nameInput.sendKeys(name);
 
         return this;
@@ -549,5 +597,33 @@ public class SignersSteps extends Signers {
 
     }
 
+    @Step
+    public SignersSteps checkButtonsOnAddNewSigningRulePage() {
+
+        addSigningRules_nameInput.shouldBe(Condition.visible, Duration.ofMillis(longWaiter));
+        addSigningRules_operationTypeDropdown.shouldBe(Condition.visible, Duration.ofMillis(waiter));
+        operationTypes.shouldBe(Condition.visible, Duration.ofMillis(waiter));
+        signers.shouldBe(Condition.visible, Duration.ofMillis(waiter));
+
+        return this;
+    }
+
+    @Step
+    public SignersSteps checkErrorForNotFillingAnySigningRulesTab() {
+
+        errorForNotFillingAnySigningRulesTab.shouldBe(Condition.visible, Duration.ofMillis(waiter));
+
+        return this;
+    }
+
+    @Step
+    public SignersSteps closePopUp() {
+
+        closePopUp.shouldBe(Condition.visible, Duration.ofMillis(waiter));
+        closePopUp.click();
+
+        return this;
+
+    }
 
 }

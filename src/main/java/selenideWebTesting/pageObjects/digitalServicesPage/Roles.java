@@ -44,10 +44,13 @@ public class Roles {
             userManagement_corporateActive = $x("//span[text()=' Corporate Active ']"),
             userManagement_corporatePassive = $x("//span[text()=' Corporate Passive ']"),
             roleChangeWarning = $x("//p[text()='განხორციელებული ცვლილებები აისახება როლზე']"),
+            addNewRoleButton = $x("//div[text()='როლის დამატება']"),
 
 
     addNewLimit = $x("//p[text()=' ახალი ოპერაციის დამატება + ']"),
-            approvalGroup = $x("//p[text()='აირჩიე ჯგუფი']/..//mat-select");
+            approvalGroup = $x("//p[text()='აირჩიე ჯგუფი']/..//mat-select"),
+
+    html = $x("//html");
 
     public ElementsCollection
             rolesList = $$x("//tr[@class='mat-row cdk-row ng-star-inserted']"),
@@ -67,7 +70,8 @@ public class Roles {
     roleLimitInputs = $$x("//input"),
             deleteRoleLimitButtons = $$x("//img[@class='delete-icon']"),
             limitOperation = $$x("//mat-label[text()='ოპერაცია']/..//mat-select[1]"),
-            limitPeriodicity = $$x("//mat-label[text()='პერიოდი']/..//mat-select[1]");
+            limitPeriodicity = $$x("//mat-label[text()='პერიოდი']/..//mat-select[1]"),
+            listOfChosenOptions = $$x("//tbody//tr//td[1]");
 
 
 }

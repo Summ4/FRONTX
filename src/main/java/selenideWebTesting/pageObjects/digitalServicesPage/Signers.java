@@ -47,7 +47,9 @@ public class Signers {
             matSelectChooseSigner = $x("//mat-label[text()='აირჩიე ხელმომწერი']//..//mat-select"),
             addOperationButton = $(new ByText("ოპერაციის დამატება +")),
             addSingersButton = $(new ByText("ხელმოწერის დამატება +")),
-            updateButtonInSigningRule = $x("//div[@class='update-button']");
+            updateButtonInSigningRule = $x("//p[text()='შეცვლა']"),
+            errorForNotFillingAnySigningRulesTab = $x("//div[text()='One or more validation errors occurred.']"),
+            closePopUp = $x("//span[text()='დახურვა']");
 
     public ElementsCollection
             listOfChosenOptions = $$x("//tbody//tr//td[1]"),

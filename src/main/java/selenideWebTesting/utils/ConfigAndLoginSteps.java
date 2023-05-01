@@ -3,6 +3,7 @@ package selenideWebTesting.utils;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.qameta.allure.Step;
 import io.restassured.RestAssured;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.NoSuchWindowException;
@@ -53,9 +54,9 @@ public class ConfigAndLoginSteps {
 
         timeout = 9000;
         browser = "chrome";
-//        browserSize = "3440x1440";
+        browserSize = "3440x1440";
         downloadsFolder = "src\\main\\downloads";
-        headless = true;
+        headless = false;
         browserCapabilities = options;
         fastSetValue = true;
 
@@ -72,7 +73,7 @@ public class ConfigAndLoginSteps {
     }
 
     @BeforeMethod(alwaysRun = true)
-    public void before(ITestResult result) throws SQLException {
+    public void before(ITestResult result) throws SQLException, InterruptedException {
         reopenBrowserOnFail = true;
 
         Selenide.sleep(5000);
@@ -87,19 +88,34 @@ public class ConfigAndLoginSteps {
             open(urlData.BaseUrl);
             selenideWebTesting.utils.SleepingSteps.stopAction(3);
         }
-
-        if (loginPage)
+        Selenide.sleep(2000);
+        if (loginPageSteps.checkIfUserIsOnLoginPage())
             loginPageSteps
                     .logginIntoSystem(userName, password);
 
         searchPageSteps
-                .inputUserInSearch("60001142298")
-                .clickOnFirstResult();
+                .inputUserInSearch("791");
+//                .clickOnFirstResult();
         digitalServicesPageSteps
                 .clickOnDigitalServices()
-                .checkDigitalServicesHeaders();
-
+                .checkDigitalServicesHeadersWhenUserIsCorporate();
 
 
     }
+
+    @Step
+    public void beforeStepForRetailUsers(String user) {
+
+        loginPageSteps
+                .clickOnLogo();
+        searchPageSteps
+                .inputUserInSearch(user);
+        digitalServicesPageSteps
+                .clickOnDigitalServices()
+                .checkDigitalServicesHeadersWhenUserIsRetail();
+
+    }
+
+
+
 }

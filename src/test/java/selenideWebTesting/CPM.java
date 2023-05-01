@@ -4,7 +4,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Story;
 import org.testng.annotations.Test;
 import selenideWebTesting.stepObjects.digitalServicesPageSteps.DigitalServicesPageSteps;
-import selenideWebTesting.stepObjects.digitalServicesPageSteps.Roles.RoleSteps;
+import selenideWebTesting.stepObjects.digitalServicesPageSteps.RoleSteps;
 import selenideWebTesting.utils.ConfigAndLoginSteps;
 
 public class CPM extends ConfigAndLoginSteps {

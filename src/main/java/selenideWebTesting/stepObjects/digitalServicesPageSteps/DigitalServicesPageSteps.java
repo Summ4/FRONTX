@@ -14,21 +14,32 @@ public class DigitalServicesPageSteps extends DigitalServicesPage {
     @Step
     public DigitalServicesPageSteps clickOnDigitalServices() {
         digitalServices.shouldBe(Condition.visible, Duration.ofMillis(longWaiter));
-        digitalServices.click();
+        digitalServices.doubleClick();
 
         return this;
     }
 
     @Step
-    public DigitalServicesPageSteps checkDigitalServicesHeaders() {
+    public DigitalServicesPageSteps checkDigitalServicesHeadersWhenUserIsCorporate() {
         digitalServicesHeader_user.shouldBe(Condition.visible, Duration.ofMillis(waiter));
         digitalServicesHeader_roles.shouldBe(Condition.visible, Duration.ofMillis(waiter));
-//        digitalServicesHeader_signingRules.shouldBe(Condition.visible, Duration.ofMillis(longWaiter));
+        digitalServicesHeader_signingRules.shouldBe(Condition.visible, Duration.ofMillis(longWaiter));
+//        digitalServicesHeader_addUsers.shouldBe(Condition.visible, Duration.ofMillis(waiter));
+        digitalServicesHeader_changes.shouldBe(Condition.visible, Duration.ofMillis(waiter));
+
+        return this;
+    }
+
+    @Step
+    public DigitalServicesPageSteps checkDigitalServicesHeadersWhenUserIsRetail() {
+        digitalServicesHeader_user.shouldBe(Condition.visible, Duration.ofMillis(waiter));
+        digitalServicesHeader_roles.shouldBe(Condition.visible, Duration.ofMillis(waiter));
         digitalServicesHeader_addUsers.shouldBe(Condition.visible, Duration.ofMillis(waiter));
         digitalServicesHeader_changes.shouldBe(Condition.visible, Duration.ofMillis(waiter));
 
         return this;
     }
+
 
     @Step
     public DigitalServicesPageSteps clickOnUsersHeader() {
@@ -52,7 +63,6 @@ public class DigitalServicesPageSteps extends DigitalServicesPage {
     public DigitalServicesPageSteps clickOnSigningRulesHeader() {
         digitalServicesHeader_signingRules.shouldBe(Condition.visible, Duration.ofMillis(longWaiter));
         digitalServicesHeader_signingRules.click();
-        digitalServicesHeader_addUsers.shouldBe(Condition.visible, Duration.ofMillis(longWaiter));
 
         return this;
     }
@@ -66,8 +76,9 @@ public class DigitalServicesPageSteps extends DigitalServicesPage {
     }
 
     @Step
-    public DigitalServicesPageSteps clickOnAddRoleButton() {
+    public DigitalServicesPageSteps clickOnAddRoleButton() throws InterruptedException {
         digitalServicesHeader_addRole.shouldBe(Condition.visible, Duration.ofMillis(longWaiter));
+        Thread.sleep(2000);
         digitalServicesHeader_addRole.click();
 
         return this;

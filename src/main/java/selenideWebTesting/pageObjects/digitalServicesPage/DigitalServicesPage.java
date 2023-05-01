@@ -11,7 +11,7 @@ public class DigitalServicesPage {
     public SelenideElement digitalServices = $x("//a[text()='ციფრული სივრცე']"),
             digitalServicesHeader_user = $x("//div[text()='მომხმარებელი']"),
             digitalServicesHeader_roles = $x("//div[text()='როლები']"),
-            digitalServicesHeader_signingRules = $x("//div[text()='ხელმოწერის წესები']"),
+            digitalServicesHeader_signingRules = $x("//div[text()='ხელმომწერები']"),
             digitalServicesHeader_addUsers = $x("//div[text()='მომხმარებლის დამატება']"),
             digitalServicesHeader_addRole = $x("//div[text()='როლის დამატება']"),
             digitalServicesHeader_changes = $x("//div[text()=' ცვლილებები ']"),
