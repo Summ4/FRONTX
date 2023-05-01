@@ -9,5 +9,3 @@ build/
 *.iws
 downloads/
 .allure
-
-#/src/main/resources/
